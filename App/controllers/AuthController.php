@@ -34,8 +34,8 @@ class AuthController
                && isset($_POST['password'])) 
         {
             $email = trim(htmlspecialchars(($_POST['username'])));
-            $users = new JsonStorage('C:\xampp\htdocs\myHomeProject\database\users.json');
-            $currentUser = $users->findOne(['email'=> $email]);
+            $USERS = new JsonStorage(path('users.json'));
+            $currentUser = $USERS->findOne(['email'=> $email]);
             if( isset($currentUser))
             {
                 if (trim( htmlspecialchars($_POST['password'])) == $currentUser['password'])

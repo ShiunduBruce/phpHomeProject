@@ -40,10 +40,10 @@ class UsersController
     }
     public function save($name, $SSN, $email, $phone, $passWordOne, $address)
     {
-        $storage = new JsonStorage('C:\xampp\htdocs\myHomeProject\database\users.json');
+        $USERS = new JsonStorage(path('users.json'));
         $user = new User($name, $SSN, $email, $phone, $passWordOne, $address);           
-        $storage->add($user);
-        $storage->save();
+        $USERS->add($user);
+        $USERS->save();
     }
     public function validate($name, $SSN, $email, $phone, $passWordOne, $address, $passWordTwo)
     {
@@ -66,8 +66,8 @@ class UsersController
         if($passWordOne != $passWordTwo || strlen($passWordOne) < 4)
             $errors ['password'] = 'Invalid password. Please note the passwords have to match and be atleast 4 characters long';
         
-        $storage = new JsonStorage('C:\xampp\htdocs\myHomeProject\database\users.json');
-        if(count($storage->findAll(['email'=>$email])) > 0)
+        $USERS = new JsonStorage(path('users.json'));
+        if(count($USERS->findAll(['email'=>$email])) > 0)
             $errors ['exists'] = 'Username with given email already exists';
            
         return $errors;

@@ -23,15 +23,15 @@ class BookingController
             return redirect('');
 
         $date = $_SESSION['bookedTime'][0];
-        $bookings = new JsonStorage('C:\xampp\htdocs\myHomeProject\database\bookings.json'); 
-        $users = new JsonStorage('C:\xampp\htdocs\myHomeProject\database\users.json'); 
+        $BOOKINGS = new JsonStorage(path('bookings.json')); 
+        $USERS = new JsonStorage(path('users.json')); 
 
-        $bookingsForThisDate = $bookings->findAll(['date'=>$date]);
+        $bookingsForThisDate = $BOOKINGS->findAll(['date'=>$date]);
         $usersWhoAppliedForThisDate = [];
 
         foreach($bookingsForThisDate as $bk)
         {
-            $usersWhoAppliedForThisDate [] =  $users->findOne(['email'=>$bk['username']]);
+            $usersWhoAppliedForThisDate [] =  $USERS->findOne(['email'=>$bk['username']]);
         }
         return view('confirmBooking', 
                         [
@@ -65,15 +65,15 @@ class BookingController
     }
     static function save($booking)
     {
-        $storage = new JsonStorage('C:\xampp\htdocs\myHomeProject\database\bookings.json');
-        $storage->add($booking);
-        $storage->save();
+        $BOOKINGS = new JsonStorage(path('bookings.json'));
+        $BOOKINGS->add($booking);
+        $BOOKINGS->save();
     }
     static function updateAvailableTimes($date, $hour)
     {
-        $storage = new JsonStorage('C:\xampp\htdocs\myHomeProject\database\times.json');
+        $TIMES = new JsonStorage(path('times.json'));
         $id = (int)explode('-', $date)[1] - 1;
-        $time = $storage->findById($id);
+        $time = $TIMES->findById($id);
         $days = $time['availableDays'];
         for($i=0; $i< count($days); $i++)
         {
@@ -94,12 +94,12 @@ class BookingController
             }
         }
         if(empty($days))
-            $storage->delete($id);
+            $TIMES->delete($id);
         else
         {
             $time['availableDays'] = $days;
-            $storage->update($id, $time);
+            $TIMES->update($id, $time);
         }
-        $storage->save();
+        $TIMES->save();
     }
 }

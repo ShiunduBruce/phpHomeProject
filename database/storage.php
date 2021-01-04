@@ -24,12 +24,10 @@ abstract class Storage implements IStorage, IFileIO {
 
   public function __construct($filename) 
   {
-      
     if (! is_readable($filename) || ! is_writable($filename)) 
     {
       throw new Exception("Data source ${filename} is invalid.");
     }
-    
     try
     {
         $this->filepath = realpath($filename);

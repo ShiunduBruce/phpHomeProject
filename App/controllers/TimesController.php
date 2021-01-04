@@ -2,7 +2,6 @@
 namespace App\Controllers;
 use JsonStorage;
 use DateTime;
-use Time;
 
 class TimesController
 {
@@ -74,18 +73,18 @@ class TimesController
     }
     static function save($newDate, $hour, $totalSlots)
     {
-        $storage = new JsonStorage('C:\xampp\htdocs\myHomeProject\database\times.json');
+        $TIMES = new JsonStorage(path('times.json'));
         $id = (int)explode('-', $newDate)[1] - 1;
-        $time = $storage->findById($id);
+        $time = $TIMES->findById($id);
         $hour = explode(':', $hour)[0] . '00';
 
         if($time == null)
-            TimesController::add($storage, $newDate, $hour, $totalSlots);
+            TimesController::add($TIMES, $newDate, $hour, $totalSlots);
         else
-            TimesController::update($storage, $time, $id, $newDate, $hour, $totalSlots);
+            TimesController::update($TIMES, $time, $id, $newDate, $hour, $totalSlots);
            
     }
-    static function update($storage, $time, $id, $newDate, $hour, $totalSlots)
+    static function update($TIMES, $time, $id, $newDate, $hour, $totalSlots)
     {
         $days = $time['availableDays'];
         $found = false;
@@ -108,13 +107,14 @@ class TimesController
             $days [] = $day;
         }
         $time['availableDays'] = $days;
-        $storage->update($id, $time);
-        $storage->save();
+
+        $TIMES->update($id, $time);
+        $TIMES->save();
 }
   
     
 
-static function add($storage, $newDate, $hour, $totalSlots)
+static function add($TIMES, $newDate, $hour, $totalSlots)
 {
     $day['date'] =  $newDate;
     $day['availableSlots'] = [$hour=>$totalSlots];
@@ -123,8 +123,8 @@ static function add($storage, $newDate, $hour, $totalSlots)
     $time['month'] = (int)explode('-', $newDate)[1];
     $time['availableDays'] = $availableDays;
 
-    $storage->add($time);
-    $storage->save();
+    $TIMES->add($time);
+    $TIMES->save();
 }
     static function validate($newDate, $time, $totalSlots)
     {
@@ -145,8 +145,8 @@ static function add($storage, $newDate, $hour, $totalSlots)
     {
         $availableTimes = [];
         $days = [];
-        $storage = new JsonStorage('C:\xampp\htdocs\myHomeProject\database\times.json');
-        $month = ( $storage->findOne(['month'=>$month]));
+        $TIMES = new JsonStorage(path('times.json'));
+        $month = ( $TIMES->findOne(['month'=>$month]));
         if(! is_null($month))                
             {$availableDays = $month['availableDays'];
             foreach($availableDays as $day)
@@ -166,9 +166,9 @@ static function add($storage, $newDate, $hour, $totalSlots)
     {
         if(isset($_SESSION['loggedin']))
         {
-            $booking = new JsonStorage('C:\xampp\htdocs\myHomeProject\database\bookings.json');    
+            $BOOKINGS = new JsonStorage(path('bookings.json'));    
             $currentUser = $_SESSION['username']; 
-            $currentBk = $booking->findOne(['username'=>$currentUser['email']]);
+            $currentBk = $BOOKINGS->findOne(['username'=>$currentUser['email']]);
                             
             if(isset($currentBk))
             {
