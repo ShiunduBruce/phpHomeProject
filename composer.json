@@ -1,0 +1,11 @@
+{
+    "name": "some/name",
+    "description": "Just pulls all the files!",
+    "autoload": {
+        "classmap": [
+            "./"
+        ],
+        "files": ["core/helpers.php", "core/calender.php"]
+
+    }
+}

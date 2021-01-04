@@ -1,0 +1,34 @@
+{
+    "5feaec79be757": {
+        "name": "Bruce Shiundu",
+        "SSN": "123412345",
+        "email": "brucemuchelule@gmail.com",
+        "phone": "363-0991-6499",
+        "password": "bruce",
+        "address": "Biro Lajos utca 33, Budapest Hungary"
+    },
+    "5fed5f7f8ccdb": {
+        "name": "Imagine Nobody",
+        "SSN": "828381399",
+        "email": "admin@nemkovid.hu",
+        "phone": "399-2191-3399",
+        "password": "admin",
+        "address": "Kalvin ter 22, 1022, Budapest Hungary"
+    },
+    "2": {
+        "name": "Charles Otieno",
+        "SSN": "812946287",
+        "email": "lwangaCharles@gmail.com",
+        "phone": "363-2291-7181",
+        "password": "CHALO",
+        "address": "Biro Lajos, 1038, Budapest, Hungary"
+    },
+    "3": {
+        "name": "Faith Avour",
+        "SSN": "929383467",
+        "email": "faithAwour@gmail.com",
+        "phone": "399-2134-9833",
+        "password": "faith",
+        "address": "Biro Lajos, 1038, Budapest, Hungary"
+    }
+}
