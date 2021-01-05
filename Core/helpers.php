@@ -6,9 +6,10 @@
  * @param  string $name
  * @param  array  $data
  */
+
 function path($filename)
 {
-    return "C:\\xampp\htdocs\myHomeProject\database\\" .   $filename;
+    return realpath($_SERVER["DOCUMENT_ROOT"]) . '\database\\' .   $filename;
 }
 function view($name, $data = [])
 {
