@@ -1,6 +1,11 @@
 <?php
 
 namespace App\Core;
+require 'App\Controllers\TimesController.php';
+require_once 'App\Controllers\BookingController.php';
+require_once 'App\Controllers\AuthController.php';
+require_once 'App\Controllers\UsersController.php';
+
 use Exception;
 
 class Router
