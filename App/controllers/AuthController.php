@@ -22,6 +22,8 @@ class AuthController
             unset($_SESSION["bookedTime"]);
         if(isset($_SESSION['currentBooking']) )
             unset($_SESSION["currentBooking"]);
+        if(isset($_SESSION['hasBooking']) )
+            unset($_SESSION["hasBooking"]);
             
         return redirect('');
     }

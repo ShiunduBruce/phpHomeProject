@@ -5,7 +5,7 @@
         "classmap": [
             "./"
         ],
-        "files": ["core/helpers.php", "core/calender.php"]
+        "files": ["App/Core/helpers.php", "App/Core/calender.php", "database/path.php"]
 
     }
 }

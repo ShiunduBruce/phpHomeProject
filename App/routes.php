@@ -15,3 +15,4 @@ $router->post('signup', 'UsersController@store');
 $router->post('', 'BookingController@index');
 $router->get('book-this-date', 'BookingController@show');
 $router->post('book-this-date', 'BookingController@store');
+$router->get('cancel-booking', 'BookingController@destroy');

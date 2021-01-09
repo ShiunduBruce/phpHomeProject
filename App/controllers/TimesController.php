@@ -131,7 +131,8 @@ static function add($TIMES, $newDate, $hour, $totalSlots)
         $currentDate = new DateTime('');
         $errors = [];
         if(!(TimesController::isValidDate($newDate) &&  $currentDate < (new DateTime($newDate))) )
-            $errors ['date'] = 'Invalid date. Please note the date has to be in future';
+            $errors ['date'] = 'Invalid date. Please note the date has to be in future 
+            and only reasonable to plan for the current year ' . date('Y');
         if(! (preg_match("/^(?:2[0-4]|[01][1-9]|10):([0-5][0-9])$/", $time) && 
             strtotime($time) >= strtotime('08:00') && strtotime($time) <= strtotime('18:00'))) 
             $errors ['time'] = 'Invalid time. Please note that valid hours are between 0800hrs - 1800hrs';
@@ -177,6 +178,8 @@ static function add($TIMES, $newDate, $hour, $totalSlots)
                     $bookingInfo [] = $bk;
                     
                 $_SESSION['currentBooking'] = $bookingInfo;
+                $_SESSION['hasBooking'] = true;
+
             }
         }
     }
@@ -186,7 +189,7 @@ static function add($TIMES, $newDate, $hour, $totalSlots)
     }
     static function isValidDate($date)
     {
-        $date = explode('-', $date);
-        return checkdate($date[1], $date[2], $date[0]);
+        $date = explode('-', $date);  
+        return checkdate($date[1], $date[2], $date[0]) && $date[0] == date('Y');
     }
 }

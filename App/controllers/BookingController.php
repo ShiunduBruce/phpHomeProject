@@ -15,6 +15,37 @@ class BookingController
         $_SESSION['bookedTime'] = (explode(' ', $_POST['selectedTime'])); 
         return redirect ('book-this-date');
     }
+    public function destroy()
+    {
+        session_start();
+        $currentUser = $_SESSION['username']['email'];
+        $BOOKINGS = new JsonStorage(path('bookings.json'));
+        
+        $BOOKINGS->delete(BookingController::findID($currentUser));
+        $BOOKINGS->save();
+
+        unset($_SESSION["hasBooking"]);
+        unset($_SESSION["currentBooking"]);
+
+        return redirect('');
+    }
+    /**
+     * Finds IDS
+     * IDS are based int and are auto increasing
+     * Thus iteration returns an ID
+     */
+    static function findID($email)
+    {
+        $BOOKINGS = new JsonStorage(path('bookings.json'));
+        $id =0;
+        foreach($BOOKINGS->findAll() as $bk)
+        {
+            if($bk['username'] == $email)
+                return $id;
+            $id += 1;
+        }
+        return -1;
+    }
     public function show()
     {
         session_start();
@@ -30,9 +61,8 @@ class BookingController
         $usersWhoAppliedForThisDate = [];
 
         foreach($bookingsForThisDate as $bk)
-        {
             $usersWhoAppliedForThisDate [] =  $USERS->findOne(['email'=>$bk['username']]);
-        }
+
         return view('confirmBooking', 
                         [
                             'date'=> $_SESSION['bookedTime'][0], 
@@ -56,7 +86,7 @@ class BookingController
         $username = $_SESSION['username']['email'];
         $date = $_SESSION['bookedTime'][0];
         $hour = $_SESSION['bookedTime'][1];
-
+        $_SESSION['hasBooking'] = true;
         BookingController::updateAvailableTimes($date, $hour);
         $booking = new Booking($username, $date, $hour);
         BookingController::save($booking);

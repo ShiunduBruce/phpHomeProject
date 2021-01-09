@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    '902e570f5c0a8a2ac6603d95f55df079' => $baseDir . '/core/helpers.php',
-    '91a3f4c31502a545077f3815b043bbb9' => $baseDir . '/core/calender.php',
+    'af823f499273f928ac5950425a226faa' => $baseDir . '/App/Core/helpers.php',
+    'e77b77dc36e6f8368e8439a0cbd1d4ec' => $baseDir . '/App/Core/calender.php',
+    '37afcb263c4d476c4e70a9c0fe0fe834' => $baseDir . '/database/path.php',
 );

@@ -11,10 +11,16 @@ class Request
      */
     public static function uri()
     {
-
-        return trim(
+        $ur = trim(
             parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'
         );
+        if(strripos($ur,'myHomeProject')>= 0)
+        {
+           $array = explode('myHomeProject', $ur);
+            return $array[count($array)-1];
+        }
+
+        return $ur;
     }
 
     /**

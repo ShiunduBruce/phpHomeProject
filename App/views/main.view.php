@@ -5,7 +5,7 @@
       <h1 class="title">The National Health Centre</h1>
       <p>Welcome to The National Health Centre homepage. For more information on  booking an appointment
        and  the available time slots for vaccination at our main building scroll below.      </p>
-    <?php if(isset($_SESSION['currentBooking']) ) :?>
+    <?php if(isset($_SESSION['hasBooking']) && $_SESSION['hasBooking'] == true ) :?>
     <div>
     <br><p class="title is-3 has-text-black"> Your reservation</p>
       <div class="box has-background-primary	column is-one-quarter">
@@ -13,14 +13,17 @@
         <p>Date - <?= $_SESSION['currentBooking'][1]?></p>
         <p>Time - <?= $_SESSION['currentBooking'][2]?> hrs</p>
       </div>
+    </div><br/>
+    <div class="buttons">
+    <button class="button is-danger is-light ajaxReq">Cancel</button>
     </div>
     <?php endif?>
       <h2 class="title">Available slots</h2>
       <h3 class='title is-4 has-text-primary'><?=date('F', mktime(0, 0, 0, $month, 10)) . ' ' . $year?></h3>
       <?= draw_calendar($month,$year, $availableDays); ?>
       <br/>
-      <button class="button is-success navigateMonth" >Previous</button>
-      <button class="button is-success navigateMonth" >Next</button><br/><br/>
+      <button class="button is-success ajaxReq" >Previous</button>
+      <button class="button is-success ajaxReq" >Next</button><br/><br/>
       <div class="control has-icons-left">
       <div class="control has-icons-left">
       <div class="select is-medium is-rounded is-primary">
@@ -32,7 +35,7 @@
           <?php endforeach ?>
         </select>
         <br/>
-        <?php if(! isset($_SESSION['currentBooking']) ) :?>
+        <?php if(! isset($_SESSION['hasBooking']) ) :?>
             <button class="button is-primary">Book</button>
         <?php endif?>
       </form>
@@ -52,11 +55,11 @@
       </p>
       </div>
       <?php endif ?>
-      <p id='myDiv'></p>
   </section>
-  <script type="text/javascript">
-  var buttons = document.querySelectorAll('.navigateMonth');
-  buttons.forEach(button => button.addEventListener('click', navigateCalender))
+  <script>
+  var buttons = document.querySelectorAll('.ajaxReq');
+console.log(buttons);
+buttons.forEach(button => button.addEventListener('click', navigateCalender))
 function navigateCalender() 
 {
     var xmlhttp = new XMLHttpRequest();
@@ -64,7 +67,7 @@ function navigateCalender()
     {
         if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
            if (xmlhttp.status == 200) {
-              var newDoc = document.open("text/html", "replace");
+              let newDoc = document.open("text/html", "replace");
               newDoc.write(xmlhttp.responseText);
               newDoc.close();
            }
@@ -78,11 +81,14 @@ function navigateCalender()
     };
     if(event.target.innerHTML == 'Next')
       xmlhttp.open("GET", "/next-month", true);
-    else
+    else if(event.target.innerHTML == 'Previous')
       xmlhttp.open("GET", "/previous-month", true);
+    else if(event.target.innerHTML == 'Cancel')
+      xmlhttp.open("GET", "/cancel-booking", true);
 
     xmlhttp.send();
 }
-</script>
+  </script>
+
 <?php require('partials/footer.php'); ?>
 

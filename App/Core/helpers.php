@@ -7,14 +7,9 @@
  * @param  array  $data
  */
 
-function path($filename)
-{
-    return realpath($_SERVER["DOCUMENT_ROOT"]) . '\database\\' .   $filename;
-}
 function view($name, $data = [])
 {
     extract($data);
-
     return require "app/views/{$name}.view.php";
 }
 /**

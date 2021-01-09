@@ -7,8 +7,9 @@ namespace Composer\Autoload;
 class ComposerStaticInitf46a45e36d93c6131e843ecd366a89ee
 {
     public static $files = array (
-        '902e570f5c0a8a2ac6603d95f55df079' => __DIR__ . '/../..' . '/core/helpers.php',
-        '91a3f4c31502a545077f3815b043bbb9' => __DIR__ . '/../..' . '/core/calender.php',
+        'af823f499273f928ac5950425a226faa' => __DIR__ . '/../..' . '/App/Core/helpers.php',
+        'e77b77dc36e6f8368e8439a0cbd1d4ec' => __DIR__ . '/../..' . '/App/Core/calender.php',
+        '37afcb263c4d476c4e70a9c0fe0fe834' => __DIR__ . '/../..' . '/database/path.php',
     );
 
     public static $classMap = array (
@@ -16,8 +17,8 @@ class ComposerStaticInitf46a45e36d93c6131e843ecd366a89ee
         'App\\Controllers\\BookingController' => __DIR__ . '/../..' . '/App/controllers/BookingController.php',
         'App\\Controllers\\TimesController' => __DIR__ . '/../..' . '/App/controllers/TimesController.php',
         'App\\Controllers\\UsersController' => __DIR__ . '/../..' . '/App/controllers/UsersController.php',
-        'App\\Core\\Request' => __DIR__ . '/../..' . '/Core/Request.php',
-        'App\\Core\\Router' => __DIR__ . '/../..' . '/Core/Router.php',
+        'App\\Core\\Request' => __DIR__ . '/../..' . '/App/Core/Request.php',
+        'App\\Core\\Router' => __DIR__ . '/../..' . '/App/Core/Router.php',
         'Booking' => __DIR__ . '/../..' . '/App/model/Booking.php',
         'ComposerAutoloaderInitf46a45e36d93c6131e843ecd366a89ee' => __DIR__ . '/..' . '/composer/autoload_real.php',
         'Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/ClassLoader.php',
