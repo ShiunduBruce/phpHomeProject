@@ -19,4 +19,7 @@ changing the line
 127.0.0.1 localhost.myHomeProject.com
 
 Finally, you may need to run the command composer update or composer run in the myHomeProject directory just to update the paths.
+ 
+The project can also be pulled from my github https://github.com/ShiunduBruce/phpHomeProject
 
+A special thank you to me, myself and I for all the hardwork ;) 
